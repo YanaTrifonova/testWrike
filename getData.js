@@ -4,7 +4,6 @@ async function getData() {
 }
 
 
-
 async function buildTree() {
     let data = await getData();
     return new Tree(data);
@@ -64,6 +63,22 @@ function Tree(data) {
 }
 
 async function printTree() {
-    let tree = buildTree();
+    let tree = await buildTree();
+    for (let node of tree.treeObject) {
+        dfs(node, 'container')
+    }
 
+    function dfs(node, id) {
+        console.log(node);
+        let nodeElement = document.createElement('div');
+        nodeElement.id = node.id;
+        nodeElement.innerHTML = node.title;
+        document.getElementById(id).appendChild(nodeElement);
+
+        for (let child of node.children) {
+            dfs(child, node.id)
+        }
+    }
 }
+
+printTree();
