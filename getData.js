@@ -69,14 +69,18 @@ async function printTree() {
     }
 
     function dfs(node, id) {
-        console.log(node);
+        let triangle = document.createElement('span');
         let nodeElement = document.createElement('div');
         nodeElement.id = node.id;
-        nodeElement.innerHTML = node.title;
+        if(node.children.length !== 0) {
+            triangle.classList.add("fas", "fa-caret-down");
+        }
+        document.getElementById(id).appendChild(triangle);
+        triangle.innerHTML = node.title;
         document.getElementById(id).appendChild(nodeElement);
 
         for (let child of node.children) {
-            dfs(child, node.id)
+            dfs(child, node.id);
         }
     }
 }
