@@ -4,3 +4,66 @@ async function getData() {
 }
 
 
+
+async function buildTree() {
+    let data = await getData();
+    return new Tree(data);
+}
+
+
+function Tree(data) {
+    this.nodeID = new Map();
+    for (let elem of data) {
+        this.nodeID.set(elem.id, {
+            id: elem.id, title: elem.title,
+            parentId: elem.parentId, children: []
+        });
+    }
+
+    const setNodes = new Set();
+    const stack = (function () {
+        const array = [];
+        return {
+            add: function (elem) {
+                array.push(elem)
+            },
+            get: function () {
+                return array.pop();
+            },
+            isEmpty: function () {
+                return array.length === 0;
+            }
+        }
+    })();
+
+    this.treeObject = [];
+
+    for (let id of this.nodeID.keys()) {
+
+        if (!setNodes.has(id)) {
+            let elem = this.nodeID.get(id);
+            stack.add(elem);
+            let parentId = elem.parentId;
+            while (!setNodes.has(parentId) && parentId !== null) {
+                let parent = this.nodeID.get(parentId);
+                parentId = parent.parentId;
+                stack.add(parent)
+            }
+            if (parentId === null) {
+                let stackElem = stack.get();
+                this.treeObject.push(stackElem);
+                setNodes.add(stackElem.id);
+            }
+            while (!stack.isEmpty()) {
+                let stackElem = stack.get();
+                this.nodeID.get(stackElem.parentId).children.push(stackElem);
+                setNodes.add(stackElem.id);
+            }
+        }
+    }
+}
+
+async function printTree() {
+    let tree = buildTree();
+
+}
