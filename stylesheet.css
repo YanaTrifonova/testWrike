@@ -6,8 +6,12 @@
     margin-left: 30px;
 }
 
-.node__leaf {
+.node__internal:hover {
+    cursor: pointer;
+}
 
+.node__leaf {
+    cursor: auto;
 }
 
 .node-hide {
@@ -49,6 +53,7 @@ input:focus{
     background-color: white;
     box-shadow: 0 4px 2px -2px gray;
     transition: all ease 0.3s;
+    cursor: pointer;
 }
 
 .button:focus {
