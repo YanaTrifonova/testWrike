@@ -69,38 +69,47 @@ async function printTree() {
     }
 
     function dfs(node, id) {
-        let classNameInternal = 'node__internal';
-        let classNameLeaf = 'node__leaf';
-        let classid = '' + node.id;
+        const classNameInternal = 'node__internal';
+        const classNameLeaf = 'node__leaf';
+        const classNameText = 'node__internal__text';
+        const classid = '' + node.id;
         let triangle = document.createElement('span');
+        let text = document.createElement('span');
         let nodeElement = document.createElement('div');
+        let triangleAndText = document.createElement('div');
         nodeElement.id = node.id;
         if (node.children.length !== 0) {
             triangle.classList.add("fas", "fa-caret-down", classid);
-            triangle.onclick = function hideAndShowChildElements() {
+            triangleAndText.onclick = function hideAndShowChildElements() {
                 const currentElem = document.getElementById(classid);
                 const children = currentElem.children;
-                console.log(currentElem);
                 const hasHide = Array.prototype.slice.apply(children).every(e => e.className.indexOf("node-hide") !== -1);
                 if (hasHide) {
                     // .. it exists
                     for (let i = 0; i < children.length; i++) {
                         children[i].classList.remove("node-hide");
                     }
+                    document.getElementsByClassName(classid)[0].classList.remove('node-rotate');
                 } else {
                     for (let i = 0; i < children.length; i++) {
                         children[i].classList.add("node-hide");
                     }
+                    document.getElementsByClassName(classid)[0].classList.add('node-rotate');
                 }
             };
-            triangle.innerHTML = node.title;
+            text.innerHTML = node.title;
+            text.classList.add(classNameText);
         } else {
-            nodeElement.classList.add(classNameLeaf);
-            nodeElement.innerHTML = node.title;
+            triangleAndText.classList.add(classNameLeaf);
+            text.innerHTML = node.title;
         }
 
-        document.getElementById(id).appendChild(triangle);
+        document.getElementById(id).appendChild(triangleAndText);
+        triangleAndText.appendChild(triangle);
+        triangleAndText.appendChild(text);
         document.getElementById(id).appendChild(nodeElement);
+
+
 
         for (let child of node.children) {
             nodeElement.classList.add(classNameInternal);

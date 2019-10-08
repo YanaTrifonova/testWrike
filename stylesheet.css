@@ -1,21 +1,37 @@
-.node {
+body {
+    box-sizing: border-box;
+    margin-left: 50px;
+    margin-top: 50px;
+}
 
+.node:hover {
+    cursor: pointer;
 }
 
 .node__internal {
     margin-left: 30px;
+    margin-top: 5px;
 }
 
 .node__internal:hover {
     cursor: pointer;
 }
 
+.node__internal__text {
+    margin-left: 5px;
+}
+
 .node__leaf {
     cursor: auto;
+    margin: 5px;
 }
 
 .node-hide {
     display: none;
+}
+
+.node-rotate {
+    transform: rotate(-90deg);
 }
 
 .navigation {
