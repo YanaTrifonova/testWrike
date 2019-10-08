@@ -65,21 +65,29 @@ function Tree(data) {
 async function printTree() {
     let tree = await buildTree();
     for (let node of tree.treeObject) {
-        dfs(node, 'container')
+        dfs(node, 'node')
     }
 
     function dfs(node, id) {
+
+        let classNameInternal = 'node__internal';
+        let classNameLeaf = 'node__leaf';
         let triangle = document.createElement('span');
         let nodeElement = document.createElement('div');
         nodeElement.id = node.id;
         if(node.children.length !== 0) {
             triangle.classList.add("fas", "fa-caret-down");
+            triangle.innerHTML = node.title;
+        } else {
+            nodeElement.classList.add(classNameLeaf);
+            nodeElement.innerHTML = node.title;
         }
         document.getElementById(id).appendChild(triangle);
-        triangle.innerHTML = node.title;
+
         document.getElementById(id).appendChild(nodeElement);
 
         for (let child of node.children) {
+            nodeElement.classList.add(classNameInternal);
             dfs(child, node.id);
         }
     }
