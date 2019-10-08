@@ -72,11 +72,25 @@ async function printTree() {
 
         let classNameInternal = 'node__internal';
         let classNameLeaf = 'node__leaf';
+        let classid = '' + node.id;
         let triangle = document.createElement('span');
         let nodeElement = document.createElement('div');
         nodeElement.id = node.id;
         if(node.children.length !== 0) {
-            triangle.classList.add("fas", "fa-caret-down");
+            triangle.classList.add("fas", "fa-caret-down", classid);
+            triangle.onclick = function hideAndShowChildElements() {
+                let children = document.getElementById(classid).children;
+                if (document.getElementById(classid).querySelector('.node-hide') !== null) {
+                    // .. it exists
+                    for (let i = 0; i < children.length; i++) {
+                        children[i].classList.remove("node-hide");
+                    }
+                } else {
+                    for (let i = 0; i < children.length; i++) {
+                        children[i].classList.add("node-hide");
+                    }
+                }
+            };
             triangle.innerHTML = node.title;
         } else {
             nodeElement.classList.add(classNameLeaf);
