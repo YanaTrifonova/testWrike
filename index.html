@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Folder tree</title>
     <script src="https://kit.fontawesome.com/66a549b658.js" crossorigin="anonymous"></script>
-    <script src="getData.js"></script>
+
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -12,12 +12,13 @@
     <div class="input">
         <span class="fa fa-search input__icon"></span><input type="text" name="searchInput" class="input__field">
     </div>
-    <button class="button" id="increase">A → Z</button>
-    <button class="button" id="decrease">Z → A</button>
+    <button class="button" id="increase" onclick="sort(true)">A → Z</button>
+    <button class="button" id="decrease" onclick="sort(false)">Z → A</button>
 </nav>
 
 <main>
     <div id="node" class="node"></div>
 </main>
 </body>
+<script src="getData.js"></script>
 </html>

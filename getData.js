@@ -6,7 +6,45 @@ async function getData() {
 
 async function buildTree() {
     let data = await getData();
-    return new Tree(data);
+
+    // let data = [
+    //     {
+    //         "id":2,
+    //         "title":"Folder 1",
+    //         "parentId":-1
+    //     },
+    //     {
+    //         "id":3,
+    //         "title":"abc",
+    //         "parentId":1
+    //     },
+    //     {
+    //         "id":-1,
+    //         "title":"Folder 2",
+    //         "parentId":null
+    //     },
+    //     {
+    //         "id":1,
+    //         "title":"Folder 2",
+    //         "parentId":-1
+    //     },
+    //     {
+    //         "id":4,
+    //         "title":"Wrike",
+    //         "parentId":2
+    //     },
+    //     {
+    //         "id":5,
+    //         "title":"cde",
+    //         "parentId":1
+    //     }
+    // ];
+
+
+    //save our tree as an object of the window
+    window.tree = new Tree(data);
+    //to have an ability to use it without binding
+    return window.tree;
 }
 
 
@@ -62,10 +100,17 @@ function Tree(data) {
     }
 }
 
-async function printTree() {
-    let tree = await buildTree();
+async function printTree(treeOrig) {
+    let tree;
+    if (treeOrig === undefined) {
+        tree = await buildTree();
+    } else {
+        tree = treeOrig;
+    }
+    const containerId = 'node';
+    document.getElementById(containerId).innerHTML = '';
     for (let node of tree.treeObject) {
-        dfs(node, 'node')
+        dfs(node, containerId);
     }
 
     function dfs(node, id) {
@@ -73,10 +118,11 @@ async function printTree() {
         const classNameLeaf = 'node__leaf';
         const classNameText = 'node__internal__text';
         const classid = '' + node.id;
-        let triangle = document.createElement('span');
-        let text = document.createElement('span');
-        let nodeElement = document.createElement('div');
-        let triangleAndText = document.createElement('div');
+        const triangle = document.createElement('span');
+        const text = document.createElement('span');
+        const nodeElement = document.createElement('div');
+        const triangleAndText = document.createElement('div');
+
         nodeElement.id = node.id;
         if (node.children.length !== 0) {
             triangle.classList.add("fas", "fa-caret-down", classid);
@@ -97,6 +143,7 @@ async function printTree() {
                     document.getElementsByClassName(classid)[0].classList.add('node-rotate');
                 }
             };
+
             text.innerHTML = node.title;
             text.classList.add(classNameText);
         } else {
@@ -109,8 +156,6 @@ async function printTree() {
         triangleAndText.appendChild(text);
         document.getElementById(id).appendChild(nodeElement);
 
-
-
         for (let child of node.children) {
             nodeElement.classList.add(classNameInternal);
             dfs(child, node.id);
@@ -118,4 +163,35 @@ async function printTree() {
     }
 }
 
-printTree();
+printTree(undefined);
+
+function sort(param) {
+    let tree = window.tree;
+    //console.log(tree);
+    for (let node of tree.treeObject) {
+        sortNodes(node);
+
+    }
+
+    function sortNodes(node) {
+        node.children.sort(function (a, b) {
+            if (a.title < b.title) {
+                if (param) {
+                    return -1
+                } else return 1;
+            }
+            if (a.title > b.title) {
+                if (param) {
+                    return 1
+                } else return -1;
+            }
+            return 0;
+        });
+        for (let i = 0; i < node.children.length; i++) {
+            sortNodes(node.children[i]);
+        }
+    }
+
+    printTree(tree);
+}
+
