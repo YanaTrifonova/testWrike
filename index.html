@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Folder tree</title>
-    <script src="https://kit.fontawesome.com/66a549b658.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <link href="stylesheet.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <nav class="navigation">
     <div class="input">
-        <span class="fa fa-search input__icon"></span><input type="text" name="searchInput" class="input__field">
+        <span class="fa fa-search input__icon"></span><input type="text" name="searchInput" id="searchInput"
+                                                             class="input__field" onkeydown="search(event)">
     </div>
     <button class="button" id="increase" onclick="sort(true)">A → Z</button>
     <button class="button" id="decrease" onclick="sort(false)">Z → A</button>

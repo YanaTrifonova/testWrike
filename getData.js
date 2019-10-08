@@ -118,11 +118,12 @@ async function printTree(treeOrig) {
         const classNameLeaf = 'node__leaf';
         const classNameText = 'node__internal__text';
         const classid = '' + node.id;
+        const triangleAndTextID = 'node' + node.id;
         const triangle = document.createElement('span');
         const text = document.createElement('span');
         const nodeElement = document.createElement('div');
         const triangleAndText = document.createElement('div');
-
+        triangleAndText.id = triangleAndTextID;
         nodeElement.id = node.id;
         if (node.children.length !== 0) {
             triangle.classList.add("fas", "fa-caret-down", classid);
@@ -167,10 +168,8 @@ printTree(undefined);
 
 function sort(param) {
     let tree = window.tree;
-    //console.log(tree);
     for (let node of tree.treeObject) {
         sortNodes(node);
-
     }
 
     function sortNodes(node) {
@@ -195,3 +194,32 @@ function sort(param) {
     printTree(tree);
 }
 
+function search(e) {
+    if (window.timeout !== undefined) {
+        clearTimeout(window.timeout)
+    }
+    window.timeout = setTimeout(function() {
+        let hiddenBySearch = document.getElementsByClassName('node-hiddenBySearch');
+        while (hiddenBySearch.length !== 0) {
+            hiddenBySearch[0].classList.remove('node-hiddenBySearch');
+        }
+        let input = document.querySelector("#searchInput").value;
+        for (let node of window.tree.treeObject) {
+            dfs(node, input);
+        }
+    }, 100);
+
+    function dfs(node, input) {
+        let anyFound = false;
+        for (let i = 0; i < node.children.length; i++) {
+            let isFound = dfs(node.children[i], input);
+            if (isFound) {
+                anyFound = true;
+            }
+        }
+        if (node.title.indexOf(input) === -1 && !anyFound) {
+            document.getElementById('node' + node.id).classList.add('node-hiddenBySearch');
+            return false;
+        } else return true;
+    }
+}

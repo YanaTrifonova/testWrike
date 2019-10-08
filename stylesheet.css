@@ -30,6 +30,10 @@ body {
     display: none;
 }
 
+.node-hiddenBySearch {
+    display: none;
+}
+
 .node-rotate {
     transform: rotate(-90deg);
 }
