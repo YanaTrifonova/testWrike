@@ -1,5 +1,5 @@
-@import url("_base.css");
-@import url("_button.css");
-@import url("_input.css");
-@import url("_navigation.css");
-@import url("_node.css");
+@import url("./_base.css");
+@import url("./_button.css");
+@import url("./_input.css");
+@import url("./_navigation.css");
+@import url("./_node.css");
