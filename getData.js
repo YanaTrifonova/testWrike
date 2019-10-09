@@ -6,63 +6,6 @@ async function getData() {
 
 async function buildTree() {
     let data = await getData();
-    // let data = [
-    //     {
-    //         "id":-1,
-    //         "title":"Folder 1",
-    //         "parentId":null
-    //     },
-    //     {
-    //         "id":1,
-    //         "title":"Folder 2",
-    //         "parentId":-1
-    //     },
-    //     {
-    //         "id":9,
-    //         "title":"Document 6",
-    //         "parentId":1
-    //     },
-    //     {
-    //         "id":10,
-    //         "title":"Document 7",
-    //         "parentId":1
-    //     },
-    //     {
-    //         "id":2,
-    //         "title":"Folder 3",
-    //         "parentId":1
-    //     },
-    //     {
-    //         "id":3,
-    //         "title":"Document 1",
-    //         "parentId":2
-    //     },
-    //     {
-    //         "id":4,
-    //         "title":"Document 2",
-    //         "parentId":2
-    //     },
-    //     {
-    //         "id":5,
-    //         "title":"Document 3",
-    //         "parentId":2
-    //     },
-    //     {
-    //         "id":6,
-    //         "title":"Folder 4",
-    //         "parentId":-1
-    //     },
-    //     {
-    //         "id":7,
-    //         "title":"Document 4",
-    //         "parentId":6
-    //     },
-    //     {
-    //         "id":8,
-    //         "title":"Document 5",
-    //         "parentId":6
-    //     },
-    // ];
     // //save our tree as an object of the window
     window.tree = new Tree(data);
     //to have an ability to use it without binding
@@ -260,6 +203,7 @@ function search(e) {
         if((anyFound || hasSubstr) && tempInput !== "") {
             document.getElementById('node' + node.id).classList.remove("node-hide");
             document.getElementById(node.id).classList.remove("node-hide");
+            document.getElementById('node' + node.id).children[0].classList.remove('node-rotate');
         }
 
         if (!hasSubstr && !anyFound) {

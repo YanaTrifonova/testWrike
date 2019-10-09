@@ -107,6 +107,16 @@ let data = [
         "parentId":-1
     },
     {
+        "id":9,
+        "title":"Document 6",
+        "parentId":1
+    },
+    {
+        "id":10,
+        "title":"Document 7",
+        "parentId":1
+    },
+    {
         "id":2,
         "title":"Folder 3",
         "parentId":1
@@ -133,12 +143,12 @@ let data = [
     },
     {
         "id":7,
-        "title":"Document 1",
+        "title":"Document 4",
         "parentId":6
     },
     {
         "id":8,
-        "title":"Document 2",
+        "title":"Document 5",
         "parentId":6
     },
 ];
