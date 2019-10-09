@@ -217,7 +217,11 @@ function search(e) {
                 anyFound = true;
             }
         }
-        if (node.title.indexOf(input) === -1 && !anyFound) {
+
+        let tempTitle = node.title.toLowerCase();
+        let tempInput = input.toLowerCase();
+
+        if (tempTitle.indexOf(tempInput) === -1 && !anyFound) {
             document.getElementById('node' + node.id).classList.add('node-hiddenBySearch');
             return false;
         } else return true;
