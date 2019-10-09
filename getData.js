@@ -18,7 +18,7 @@ function Tree(data) {
     for (let elem of data) {
         this.nodeID.set(elem.id, {
             id: elem.id, title: elem.title,
-            parentId: elem.parentId, children: []
+            parentId: elem.parentId, children: [], isHidden: false
         });
     }
 
@@ -100,15 +100,18 @@ async function printTree(treeOrig) {
                     // .. it exists
                     for (let i = 0; i < children.length; i++) {
                         children[i].classList.remove("node-hide");
+                        node.isHidden = false;
                     }
                     document.getElementsByClassName(classID)[0].classList.remove('node-rotate');
                 } else {
                     for (let i = 0; i < children.length; i++) {
                         children[i].classList.add("node-hide");
+                        node.isHidden = true;
                     }
                     document.getElementsByClassName(classID)[0].classList.add('node-rotate');
                 }
             };
+
 
             text.innerHTML = node.title;
             text.classList.add(classNameText);
@@ -125,6 +128,18 @@ async function printTree(treeOrig) {
         for (let child of node.children) {
             nodeElement.classList.add(classNameInternal);
             dfs(child, node.id);
+        }
+        const currentElem = document.getElementById(classID);
+        const children = currentElem.children;
+        if (!node.isHidden) {
+            for (let i = 0; i < children.length; i++) {
+                children[i].classList.remove("node-hide");
+            }
+        } else {
+            for (let i = 0; i < children.length; i++) {
+                children[i].classList.add("node-hide");
+            }
+            document.getElementsByClassName(classID)[0].classList.add('node-rotate');
         }
     }
 }
