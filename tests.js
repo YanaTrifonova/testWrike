@@ -93,5 +93,52 @@
 //
 // ];
 
+////////////////////////////New tree////////////////////////////////////////////////////////////////////////////////////
 
-
+let data = [
+    {
+        "id":-1,
+        "title":"Folder 1",
+        "parentId":null
+    },
+    {
+        "id":1,
+        "title":"Folder 2",
+        "parentId":-1
+    },
+    {
+        "id":2,
+        "title":"Folder 3",
+        "parentId":1
+    },
+    {
+        "id":3,
+        "title":"Document 1",
+        "parentId":2
+    },
+    {
+        "id":4,
+        "title":"Document 2",
+        "parentId":2
+    },
+    {
+        "id":5,
+        "title":"Document 3",
+        "parentId":2
+    },
+    {
+        "id":6,
+        "title":"Folder 4",
+        "parentId":-1
+    },
+    {
+        "id":7,
+        "title":"Document 1",
+        "parentId":6
+    },
+    {
+        "id":8,
+        "title":"Document 2",
+        "parentId":6
+    },
+];
