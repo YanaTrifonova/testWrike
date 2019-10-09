@@ -1,5 +1,5 @@
-@import url("https://github.com/YanaTrifonova/testWrike/blob/master/css/_base.css");
-@import url("https://github.com/YanaTrifonova/testWrike/blob/master/css/_button.css");
-@import url("https://github.com/YanaTrifonova/testWrike/blob/master/css/_input.css");
-@import url("https://github.com/YanaTrifonova/testWrike/blob/master/css/_navigation.css");
-@import url("https://github.com/YanaTrifonova/testWrike/blob/master/css/_node.css");
+@import "css/_base.css";
+@import "css/_button.css";
+@import "css/_input.css";
+@import "css/_navigation.css";
+@import "css/_node.css";
