@@ -6,41 +6,6 @@ async function getData() {
 
 async function buildTree() {
     let data = await getData();
-
-    // let data = [
-    //     {
-    //         "id":2,
-    //         "title":"Folder 1",
-    //         "parentId":-1
-    //     },
-    //     {
-    //         "id":3,
-    //         "title":"abc",
-    //         "parentId":1
-    //     },
-    //     {
-    //         "id":-1,
-    //         "title":"Folder 2",
-    //         "parentId":null
-    //     },
-    //     {
-    //         "id":1,
-    //         "title":"Folder 2",
-    //         "parentId":-1
-    //     },
-    //     {
-    //         "id":4,
-    //         "title":"Wrike",
-    //         "parentId":2
-    //     },
-    //     {
-    //         "id":5,
-    //         "title":"cde",
-    //         "parentId":1
-    //     }
-    // ];
-
-
     //save our tree as an object of the window
     window.tree = new Tree(data);
     //to have an ability to use it without binding
@@ -117,7 +82,7 @@ async function printTree(treeOrig) {
         const classNameInternal = 'node__internal';
         const classNameLeaf = 'node__leaf';
         const classNameText = 'node__internal__text';
-        const classid = '' + node.id;
+        const classID = '' + node.id;
         const triangleAndTextID = 'node' + node.id;
         const triangle = document.createElement('span');
         const text = document.createElement('span');
@@ -126,9 +91,9 @@ async function printTree(treeOrig) {
         triangleAndText.id = triangleAndTextID;
         nodeElement.id = node.id;
         if (node.children.length !== 0) {
-            triangle.classList.add("fas", "fa-caret-down", classid);
+            triangle.classList.add("fas", "fa-caret-down", classID);
             triangleAndText.onclick = function hideAndShowChildElements() {
-                const currentElem = document.getElementById(classid);
+                const currentElem = document.getElementById(classID);
                 const children = currentElem.children;
                 const hasHide = Array.prototype.slice.apply(children).every(e => e.className.indexOf("node-hide") !== -1);
                 if (hasHide) {
@@ -136,12 +101,12 @@ async function printTree(treeOrig) {
                     for (let i = 0; i < children.length; i++) {
                         children[i].classList.remove("node-hide");
                     }
-                    document.getElementsByClassName(classid)[0].classList.remove('node-rotate');
+                    document.getElementsByClassName(classID)[0].classList.remove('node-rotate');
                 } else {
                     for (let i = 0; i < children.length; i++) {
                         children[i].classList.add("node-hide");
                     }
-                    document.getElementsByClassName(classid)[0].classList.add('node-rotate');
+                    document.getElementsByClassName(classID)[0].classList.add('node-rotate');
                 }
             };
 
